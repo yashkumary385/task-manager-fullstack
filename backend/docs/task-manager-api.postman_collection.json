@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "ce648e07-c81e-4dfd-b337-07803a8de868",
+		"name": "Task-Manager-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39334158",
+		"_collection_link": "https://hey666-5328.postman.co/workspace/web-development~5c48e827-ca29-4c01-8317-16fc98ca6397/collection/39334158-ce648e07-c81e-4dfd-b337-07803a8de868?action=share&source=collection_link&creator=39334158"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"Christain\",\r\n  \"email\": \"Christian@gmail.com\",\r\n  \"userName\": \"K.Dot\",\r\n  \"password\": \"123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "## Register User API\n\nThis endpoint allows new users to register by providing their personal details. Upon successful registration, the API will return the user's information along with a success message.\n\n### Request\n\n**Method:** POST  \n**URL:** `http://127.0.0.1:8000/api/auth/register`\n\n#### Request Body\n\nThe request body must be in JSON format and include the following parameters:\n\n- `fullName` (string): The full name of the user.\n    \n- `email` (string): The email address of the user.\n    \n- `userName` (string): The desired username for the user.\n    \n- `password` (string): The password chosen by the user.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"fullName\": \"Test\",\n  \"email\": \"test@example.com\",\n  \"userName\": \"test\",\n  \"password\": \"123\"\n}\n\n ```\n\n### Response\n\nOn successful registration, the API responds with a status code of `201` and returns a JSON object containing the following structure:\n\n- `message` (string): A message indicating the success of the registration (may be empty).\n    \n- `user` (object): An object containing the registered user's information:\n    \n    - `_id` (string): The unique identifier for the user.\n        \n    - `fullName` (string): The full name of the user.\n        \n    - `email` (string): The email address of the user.\n        \n    - `userName` (string): The username of the user.\n        \n    - `role` (string): The role assigned to the user.\n        \n    - `__v` (number): Version key for the user document.\n        \n\n**Example Response:**\n\n``` json\n{\n  \"message\": \"\",\n  \"user\": {\n    \"_id\": \"\",\n    \"fullName\": \"\",\n    \"email\": \"\",\n    \"userName\": \"\",\n    \"role\": \"\",\n    \"__v\": 0\n  }\n}\n\n ```\n\n### Related Endpoints\n\nThis endpoint's response structure is similar to responses from other endpoints, which may include user information such as `id`, `role`, `iat`, and `exp`."
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "## Login Endpoint\n\nThis endpoint is used to authenticate a user by logging them in with their email and password. Upon successful authentication, the server responds with a token that can be used for subsequent requests to protected resources.\n\n### Request\n\n- **Method**: POST\n    \n- **URL**: `http://127.0.0.1:8000/api/auth/login`\n    \n- **Content-Type**: application/json\n    \n\n#### Request Body\n\nThe request body must be in JSON format and include the following parameters:\n\n- **email** (string): The email address of the user attempting to log in.\n    \n- **password** (string): The password associated with the user's account.\n    \n\n**Example Request Body**:\n\n``` json\n{\n  \"email\": \"user@example.com\",\n  \"password\": \"yourpassword\"\n}\n\n ```\n\n### Response\n\nThe response will be in JSON format and will include the following fields:\n\n- **message** (string): A message indicating the result of the login attempt. This may be empty or contain error information.\n    \n- **token** (string): A token that is issued upon successful authentication. This token should be used in the Authorization header for subsequent requests to protected endpoints.\n    \n\n#### Example Response\n\n``` json\n{\n  \"message\": \"\",\n  \"token\": \"your_generated_token\"\n}\n\n ```\n\n### Status Codes\n\n- **211**: Indicates that the request was processed but may not have resulted in a successful login (e.g., invalid credentials).\n    \n- **200**: Indicates a successful login, which will return a response similar to the one shown above, including user details in related endpoints.\n    \n\n### Related Responses\n\nFor further interactions with the API, other endpoints may return user information structured as follows:\n\n``` json\n{\n  \"message\": \"\",\n  \"user\": {\n    \"id\": \"user_id\",\n    \"role\": \"user_role\",\n    \"iat\": \"issued_at_timestamp\",\n    \"exp\": \"expiration_timestamp\"\n  }\n}\n\n ```\n\nThis structure provides additional context about the logged-in user and their session."
+					},
+					"response": []
+				},
+				{
+					"name": "Protected Route",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "### Endpoint Description\n\nThis endpoint retrieves protected resource information for the authenticated user. It responds with user details and a message indicating the status of the request.\n\n### Request\n\n- **Method**: GET\n    \n- **URL**: `http://127.0.0.1:8000/protected`\n    \n\n### Expected Response\n\nUpon a successful request, the server will return a JSON response with the following structure:\n\n``` json\n{\n  \"message\": \"\",\n  \"user\": {\n    \"id\": \"\",\n    \"role\": \"\",\n    \"iat\": 0,\n    \"exp\": 0\n  }\n}\n\n ```\n\n- **message**: A string that may contain additional information about the request status.\n    \n- **user**: An object containing the following fields:\n    \n    - **id**: The unique identifier of the user.\n        \n    - **role**: The role assigned to the user (e.g., admin, user).\n        \n    - **iat**: The issued at timestamp, indicating when the token was created.\n        \n    - **exp**: The expiration timestamp of the token.\n        \n\n### Notes\n\n- The request must be made by an authenticated user; otherwise, it may return an error or an unauthorized status.\n    \n- The response will always include the `user` object if the request is successful, along with a message.\n    \n- Ensure that the user has the necessary permissions to access this endpoint."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "create task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "## API Endpoint: Create Task\n\nThis endpoint allows users to create a new task in the system. The task is defined by various attributes such as title, description, priority, status, due date, and optional file attachments.\n\n### Request\n\n- **Method**: POST\n    \n- **URL**: `http://localhost:8000/api/tasks`\n    \n\n#### Request Body (form-data)\n\nThe request body must include the following parameters:\n\n| Key | Type | Description |\n| --- | --- | --- |\n| `title` | text | The title of the task. |\n| `description` | text | A detailed description of the task. |\n| `priority` | text | The priority level of the task. |\n| `status` | text | The current status of the task. |\n| `duedate` | text | The due date for the task. |\n| `attachments` | file | Any files related to the task. |\n\n### Response\n\nThe response will vary based on the outcome of the request:\n\n- **Success (200)**: When the task is created successfully, the response will include the created task details in the following format:\n    \n\n``` json\n{\n  \"_id\": \"\",\n  \"title\": \"\",\n  \"description\": \"\",\n  \"priority\": \"\",\n  \"status\": \"\",\n  \"attachments\": [\"\"],\n  \"createdAt\": \"\",\n  \"updatedAt\": \"\",\n  \"__v\": 0\n}\n\n ```\n\n- **Error (404)**: If the task creation fails, the response will return a message indicating the error:\n    \n\n``` json\n{\n  \"message\": \"\"\n}\n\n ```\n\n### Related Endpoints\n\nOther methods interacting with this API may return similar data structures, providing consistency across the API. For example, retrieving a task or updating a task will yield responses with similar fields.\n\nThis documentation reflects the updated purpose of the request, the expected request body format, and the revised structure of the response body.\n\nThis endpoint allows users to create a new task in the system. By sending a POST request to `http://localhost:8000/api/tasks`, users can submit the necessary details for the task they wish to create.\n\n### Request Body Format\n\nThe request must be sent with a `form-data` body containing the following parameters:\n\n- **title** (text): The title of the task.\n    \n- **description** (text): A detailed description of the task.\n    \n- **priority** (text): The priority level of the task (e.g., low, medium, high).\n    \n- **status** (text): The current status of the task (e.g., pending, completed).\n    \n- **duedate** (text): The due date for the task in a valid date format.\n    \n- **attachments** (file): Any files that need to be attached to the task.\n    \n\n### Response Structure\n\nUpon a successful request, the API will return a response with a status code of `201 Created`. The response body will be in JSON format and will contain the following structure:\n\n``` json\n{\n    \"message\": \"\",\n    \"task\": {\n        \"title\": \"\",\n        \"description\": \"\",\n        \"priority\": \"\",\n        \"status\": \"\",\n        \"attachments\": [\"\"],\n        \"_id\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"__v\": 0\n    }\n}\n\n ```\n\n- **message**: A confirmation message indicating the outcome of the request.\n    \n- **task**: An object representing the created task with the following fields:\n    \n    - **title**: The title of the task.\n        \n    - **description**: A detailed description of the task.\n        \n    - **priority**: The priority level of the task.\n        \n    - **status**: The current status of the task.\n        \n    - **attachments**: An array containing any attached files.\n        \n    - **_id**: The unique identifier for the task.\n        \n    - **createdAt**: The timestamp of when the task was created.\n        \n    - **updatedAt**: The timestamp of the last update to the task.\n        \n    - **__v**: The version key for the task document.\n        \n\n### Related Responses\n\nOther methods called on this endpoint may return similar data structures with a status code of `200 OK`, providing access to existing tasks and their details.\n\nThis endpoint is essential for task management, allowing users to efficiently create and track their tasks.\n\n### **Authority**\n\nonly user with admin role can assign tasks ."
+					},
+					"response": []
+				},
+				{
+					"name": "get task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "## API Endpoint: Get Tasks\n\n### Purpose\n\nThis endpoint retrieves a list of tasks from the server. It is designed to provide users with the current state of tasks, including their details such as title, description, priority, and status.\n\n### Request Method\n\n`GET`\n\n### Request URL\n\n`http://localhost:8000/api/tasks`\n\n### Response Structure\n\nUpon a successful request, the server responds with a JSON array containing task objects. Each task object includes the following fields:\n\n- **_id**: (String) Unique identifier for the task.\n    \n- **title**: (String) The title of the task.\n    \n- **description**: (String) A detailed description of the task.\n    \n- **priority**: (String) The priority level of the task (e.g., low, medium, high).\n    \n- **status**: (String) The current status of the task (e.g., pending, completed).\n    \n- **attachments**: (Array of Strings) A list of attachment identifiers associated with the task.\n    \n- **createdAt**: (String) Timestamp indicating when the task was created.\n    \n- **updatedAt**: (String) Timestamp indicating when the task was last updated.\n    \n- **__v**: (Number) Version key for the task document.\n    \n\n### Example Response\n\n``` json\n[\n    {\n        \"_id\": \"task_id_1\",\n        \"title\": \"Sample Task\",\n        \"description\": \"This is a sample task description.\",\n        \"priority\": \"high\",\n        \"status\": \"pending\",\n        \"attachments\": [\"attachment_id_1\"],\n        \"createdAt\": \"2023-01-01T00:00:00Z\",\n        \"updatedAt\": \"2023-01-01T00:00:00Z\",\n        \"__v\": 0\n    },\n    ...\n]\n\n ```\n\n### Status Codes\n\n- **200 OK**: The request was successful, and the task list is returned.\n    \n\nThis endpoint is essential for users to manage and view their tasks effectively, allowing for better organization and tracking of work items.\n\n### **Authority**\n\nonly user with admin role can read assigned tasks ."
+					},
+					"response": []
+				},
+				{
+					"name": "get one task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "## Endpoint Description\n\nThis endpoint retrieves the details of a specific task identified by its unique ID. It is a **GET** request to the URL `http://localhost:8000/api/tasks/{taskId}`, where `{taskId}` is the unique identifier of the task you wish to retrieve.\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: `http://localhost:8000/api/tasks/{taskId}`\n    \n\n### Response Structure\n\nOn a successful request, the server responds with a **200 OK** status and a JSON object containing the following structure:\n\n``` json\n{\n  \"message\": \"\",\n  \"task\": {\n    \"_id\": \"\",\n    \"title\": \"\",\n    \"description\": \"\",\n    \"priority\": \"\",\n    \"status\": \"\",\n    \"attachments\": [\"\"],\n    \"createdAt\": \"\",\n    \"updatedAt\": \"\",\n    \"__v\": 0\n  }\n}\n\n ```\n\n#### Response Fields\n\n- **message**: A string that may contain additional information about the request.\n    \n- **task**: An object representing the task details.\n    \n    - **_id**: The unique identifier of the task.\n        \n    - **title**: The title of the task.\n        \n    - **description**: A detailed description of the task.\n        \n    - **priority**: The priority level of the task.\n        \n    - **status**: The current status of the task (e.g., pending, completed).\n        \n    - **attachments**: An array of strings representing any attachments related to the task.\n        \n    - **createdAt**: The timestamp when the task was created.\n        \n    - **updatedAt**: The timestamp when the task was last updated.\n        \n    - **__v**: Version key for the task document.\n        \n\n### Related Responses\n\nThis endpoint may return similar structures in other related requests, ensuring consistency across the API. For example, retrieving a list of tasks or updating a task may yield similar response formats.\n\n### Usage\n\nUse this endpoint to fetch detailed information about a specific task, which can be useful for displaying task details in a user interface or for further processing in your application."
+					},
+					"response": []
+				},
+				{
+					"name": "delete task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "### DELETE Task Endpoint\n\nThis endpoint is used to delete a specific task from the task management system. The task to be deleted is identified by its unique ID provided in the URL.\n\n#### Request\n\n- **Method**: DELETE\n    \n- **URL**: `http://localhost:8000/api/tasks/{taskId}`\n    \n    - Replace `{taskId}` with the ID of the task you wish to delete.\n        \n\n#### Response\n\nUpon successful deletion, the API will return a JSON response with the following structure:\n\n- **Status Code**: 200\n    \n- **Content-Type**: application/json\n    \n- { \"message\": \"\"}\n    \n\nThe `message` field will confirm the successful deletion of the task.\n\n#### Related Data Models\n\nOther endpoints related to tasks may return a more detailed structure, which includes fields such as:\n\n- `_id`: The unique identifier of the task.\n    \n- `title`: The title of the task.\n    \n- `description`: A brief description of the task.\n    \n- `priority`: The priority level of the task.\n    \n- `status`: The current status of the task.\n    \n- `attachments`: An array of attachments related to the task.\n    \n- `createdAt`: Timestamp of when the task was created.\n    \n- `updatedAt`: Timestamp of the last update made to the task.\n    \n- `__v`: Version key for the task.\n    \n\nThis DELETE request is crucial for managing tasks effectively within the application, allowing users to remove tasks that are no longer needed.\n\n### **Authority**\n\nonly user with admin role can delete assigned tasks ."
+					},
+					"response": []
+				},
+				{
+					"name": "update task",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" :\"post modern democarts\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/tasks/688be096936c8d7fa15a4374",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tasks",
+								"688be096936c8d7fa15a4374"
+							]
+						},
+						"description": "## Update Task\n\nThis endpoint allows you to update an existing task by its unique identifier. You can modify the task's title and other attributes as needed.\n\n### Request\n\n- **Method**: PUT\n    \n- **URL**: `http://localhost:8000/api/tasks/{taskId}`\n    \n\n#### Request Body\n\nThe request body must be in JSON format and include the following parameter:\n\n- **title** (string): The new title for the task.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"title\": \"post modern democarts\"\n}\n\n ```\n\n### Response\n\nUpon a successful update, the API will return a JSON response with a status code of 200. The structure of the response will be as follows:\n\n``` json\n{\n  \"message\": \"\",\n  \"task\": {\n    \"_id\": \"\",\n    \"title\": \"\",\n    \"description\": \"\",\n    \"priority\": \"\",\n    \"status\": \"\",\n    \"attachments\": [\"\"],\n    \"createdAt\": \"\",\n    \"updatedAt\": \"\",\n    \"__v\": 0\n  }\n}\n\n ```\n\n#### Response Fields\n\n- **message** (string): A message indicating the result of the operation.\n    \n- **task** (object): The updated task object containing:\n    \n    - **_id** (string): The unique identifier of the task.\n        \n    - **title** (string): The updated title of the task.\n        \n    - **description** (string): A description of the task.\n        \n    - **priority** (string): The priority level of the task.\n        \n    - **status** (string): The current status of the task.\n        \n    - **attachments** (array of strings): Any attachments associated with the task.\n        \n    - **createdAt** (string): Timestamp of when the task was created.\n        \n    - **updatedAt** (string): Timestamp of when the task was last updated.\n        \n    - **__v** (integer): Version key for the task.\n        \n\nThis endpoint is crucial for maintaining the integrity of task data within the application, allowing users to keep their task information up to date."
+					},
+					"response": []
+				},
+				{
+					"name": "update status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "## Update Task Status\n\nThis endpoint allows you to update the status of a specific task identified by its unique ID. By sending a PATCH request to this endpoint, you can change the status of the task to reflect its current state, such as marking it as \"completed\".\n\n### Request\n\n- **Method:** PATCH\n    \n- **URL:** `http://localhost:8000/api/tasks/{taskId}/status`\n    \n- **Request Body:**\n    \n    - The request body should be in JSON format and include the following key:\n        \n        - `status` (string): The new status of the task. For example, you can set it to \"completed\".\n            \n\n#### Example Request Body\n\n``` json\n{\n  \"status\": \"completed\"\n}\n\n ```\n\n### Response\n\nUpon a successful request, the server will respond with a status code of `200` and a JSON object containing the following structure:\n\n- `message` (string): A message indicating the result of the operation (may be empty).\n    \n- `task` (object): An object representing the updated task with the following fields:\n    \n    - `_id` (string): The unique identifier of the task.\n        \n    - `title` (string): The title of the task.\n        \n    - `description` (string): A brief description of the task.\n        \n    - `priority` (string): The priority level of the task.\n        \n    - `status` (string): The current status of the task after the update.\n        \n    - `attachments` (array of strings): Any attachments related to the task.\n        \n    - `createdAt` (string): The timestamp when the task was created.\n        \n    - `updatedAt` (string): The timestamp when the task was last updated.\n        \n    - `__v` (number): The version key for the task.\n        \n\n#### Example Response\n\n``` json\n{\n  \"message\": \"\",\n  \"task\": {\n    \"_id\": \"\",\n    \"title\": \"\",\n    \"description\": \"\",\n    \"priority\": \"\",\n    \"status\": \"\",\n    \"attachments\": [\"\"],\n    \"createdAt\": \"\",\n    \"updatedAt\": \"\",\n    \"__v\": 0\n  }\n}\n\n ```\n\nThis endpoint is crucial for managing task states effectively within your application, allowing users to keep track of their tasks' progress."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "### API Endpoint: Get All Users\n\n**HTTP Method:** GET  \n**URL:** `http://localhost:8000/allUsers`\n\n#### Description\n\nThis endpoint retrieves a list of all users from the system. It returns user details including their unique identifiers and basic information.\n\n#### Request Format\n\nThis endpoint does not require any request body or parameters. Simply send a GET request to the specified URL.\n\n#### Response Structure\n\nOn a successful request, the server responds with a JSON object containing the following structure:\n\n``` json\n{\n  \"message\": \"\",\n  \"users\": [\n    {\n      \"_id\": \"\",\n      \"fullName\": \"\",\n      \"email\": \"\",\n      \"userName\": \"\",\n      \"role\": \"\",\n      \"__v\": 0\n    }\n  ]\n}\n\n ```\n\n- **message**: A string that may contain additional information about the request.\n    \n- **users**: An array of user objects, where each object contains:\n    \n    - **_id**: The unique identifier for the user.\n        \n    - **fullName**: The full name of the user.\n        \n    - **email**: The email address of the user.\n        \n    - **userName**: The username of the user.\n        \n    - **role**: The role assigned to the user within the system.\n        \n    - **__v**: A version key used for versioning the user document.\n        \n\n#### Status Codes\n\n- **200 OK**: The request was successful, and the user data has been returned.\n    \n\nThis endpoint is essential for fetching user information for administrative purposes or user management functionalities in the application."
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "## Update User Information\n\nThis endpoint allows you to update the information of a specific user identified by their unique user ID. The request is made using the HTTP PUT method, and it requires the user ID to be specified in the URL.\n\n### Request\n\n- **URL**: `http://localhost:8000/users/{userId}`\n    \n- **Method**: PUT\n    \n- **Path Parameter**:\n    \n    - `userId` (string): The unique identifier of the user whose information is to be updated.\n        \n- **Request Body** (raw JSON):\n    \n    - `fullName` (string): The new full name of the user. This is the only field that can be updated in this request.\n        \n\n### Example Request Body\n\n``` json\n{\n  \"fullName\": \"joey\"\n}\n\n ```\n\n### Response\n\nUpon a successful update, the API responds with a status code of `200` and returns a JSON object containing the following structure:\n\n- `message` (string): A message indicating the result of the update operation (may be empty).\n    \n- `user` (object): An object representing the updated user, which includes:\n    \n    - `_id` (string): The unique identifier of the user.\n        \n    - `fullName` (string): The updated full name of the user.\n        \n    - `email` (string): The email address of the user.\n        \n    - `userName` (string): The username of the user.\n        \n    - `password` (string): The password of the user (typically not returned for security reasons).\n        \n    - `role` (string): The role of the user (e.g., admin, user).\n        \n    - `__v` (number): The version key for the user document.\n        \n\n### Example Response\n\n``` json\n{\n  \"message\": \"\",\n  \"user\": {\n    \"_id\": \"\",\n    \"fullName\": \"\",\n    \"email\": \"\",\n    \"userName\": \"\",\n    \"password\": \"\",\n    \"role\": \"\",\n    \"__v\": 0\n  }\n}\n\n ```\n\n### Related Responses\n\nOther methods interacting with this user endpoint may return similar structures, often with a `message` field indicating the status of the operation. Responses from other endpoints may include lists of users or tasks, but they will share a common structure with the `message` key.\n\nThis endpoint is essential for maintaining user information and ensuring that the user profile is up-to-date."
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "### DELETE User Endpoint\n\nThis endpoint is used to delete a user from the system based on their unique identifier. The request will remove the specified user and return a confirmation message upon successful deletion.\n\n#### Request\n\n- **Method**: DELETE\n    \n- **URL**: `http://localhost:8000/users/{userId}`\n    \n    Replace `{userId}` with the unique identifier of the user you wish to delete.\n    \n\n#### Response\n\n- **Status Code**: 200 OK\n    \n- **Content-Type**: application/json\n    \n- { \"message\": \"\"}\n    \n\nThe response will contain a `message` field, which indicates the result of the deletion operation. A successful deletion will return an empty message.\n\n#### Related Responses\n\nIn addition to the deletion operation, other methods interacting with this user endpoint may return similar response structures, such as:\n\n- { \"message\": \"\", \"user\": { \"_id\": \"\", \"fullName\": \"\", \"email\": \"\", \"userName\": \"\", \"password\": \"\", \"role\": \"\", \"__v\": 0 }}\n    \n- { \"message\": \"\", \"users\": \\[ { \"_id\": \"\", \"fullName\": \"\", \"email\": \"\", \"userName\": \"\", \"role\": \"\", \"__v\": 0 } \\]}\n    \n\nThis endpoint is essential for managing user data within the application, allowing for the removal of users as necessary."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
