@@ -1,19 +1,20 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios"
 import { toast } from "react-toastify";
+import API from "../utils/axios"
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext)
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(() => localStorage.getItem("token") || null); // get the token from the storage if not there then empty string
     const [loading, setLoading] = useState(true)
-
+     
     const login = async (email, password) => {
-        try {
-            const res = await axios.post("http://127.0.0.1:8000/api/auth/login", {
-                email,
-                password
-            })
+  try {
+    const res = await API.post("/auth/login", {
+      email,
+      password,
+    });
             const { token, user } = res.data
             setToken(token);
             localStorage.setItem("token",token)

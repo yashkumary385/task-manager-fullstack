@@ -8,6 +8,18 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGO_DB_URI;
+//test Route
+app.get('/api/test', (req, res) => {
+  res.json({ message: "✅ Backend is working!" });
+});
+// dummy test route
+app.post("/api/auth/register", (req, res) => {
+  res.status(201).json({ token: "mock-token" });
+});
+
+
+
+
 
 // Middleware
 app.use(cors());
@@ -32,14 +44,16 @@ app.use("/api/tasks", taskRoutes);
 
 
 
-mongoose
-  .connect(MONGO_URI,)
-  .then(() => {
-    console.log("✅ Connected to MongoDB");
-    app.listen(PORT, "127.0.0.1", () => {
-      console.log(`🚀 Server running at http://127.0.0.1:${PORT}`);
+if (process.env.NODE_ENV !== "test") {
+  mongoose
+    .connect(MONGO_URI)
+    .then(() => {
+      console.log("✅ Connected to MongoDB");
+      app.listen(PORT, "0.0.0.0", () => {
+        console.log(` Server running at http://127.0.0.1:${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error(" MongoDB connection error:", err);
     });
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
-  });
+}

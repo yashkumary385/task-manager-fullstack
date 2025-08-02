@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    networks:
+      - task-manager-network
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: bash -c "npm install && npm run dev"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - task-manager-network
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    command: bash -c "npm install && npm run dev"
+
+  mongodb:
+    image: mongo
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - task-manager-network
+
+volumes:
+  mongodb:
+
+networks:
+  task-manager-network:
