@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { CircleUser, Key, Mail, User, UserRoundPen, UserStar ,Eye} from 'lucide-react';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
-import axios from "axios"
+import api from "../api.js"
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
@@ -61,7 +61,7 @@ const SignUp = () => {
         // }
         console.log(form)
         try {
-            const res = await axios.post("http://localhost:8000/api/auth/register", {
+            const res = await api.post("/api/auth/register", {
                 fullName: form.fullName,
                 email: form.email,
                 password: form.password,

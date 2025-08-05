@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios"
 import { toast } from "react-toastify";
 import API from "../utils/axios"
+import api from "../api.js"
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext)
 export const AuthProvider = ({ children }) => {
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
      
     const login = async (email, password) => {
   try {
-    const res = await API.post("/auth/login", {
+    const res = await api.post("api/auth/login", {
       email,
       password,
     });
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         // console.log("no token")
         return
     }
-                const res = await axios.get("http://localhost:8000/current-user", {
+                const res = await api.get("/current-user", {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 setUser(res.data.user)

@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
+import api from "../api.js"
 const Dashboard = () => {
   const { user, logout , token } = useAuth();
   const [editUser, setEditUser] = useState(null)
@@ -47,7 +47,7 @@ const Dashboard = () => {
       try {
         let confirm = window.confirm("Are you sure you want to delete profile you wont be able to recover it ? ")
         if(confirm){
-           const res = await axios.delete(`http://localhost:8000/users/${user._id}`,
+           const res = await api.delete(`/users/${user._id}`,
             {
               headers : {Authorization : `Bearer ${token}`}
             }
@@ -88,7 +88,7 @@ const Dashboard = () => {
     const handleSubmit = async(e)=>{
       e.preventDefault();
       try {
-        const res = await axios.put(`http://localhost:8000/users/${editUser}`,{
+        const res = await api.put(`/users/${editUser}`,{
           fullName: form.fullName,
                 email: form.email,
                 userName:form.userName,

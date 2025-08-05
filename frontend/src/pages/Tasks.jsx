@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Modal from 'react-bootstrap/Modal';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
+import api from '../api';
 const Tasks = () => {
     const { user, token } = useAuth();
     const [editTask, setEditTask] = useState(null)
@@ -28,7 +29,7 @@ const Tasks = () => {
         const getNonAdmin = async()=>{
         try {
             
-            const res = await axios("http://localhost:8000/getAll",{
+            const res = await api.get("http://localhost:8000/getAll",{
                 headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -76,7 +77,7 @@ const Tasks = () => {
         try {
 
             if (editTask) {
-                const res = await axios.put(`http://localhost:8000/api/tasks/${editTask}`, {
+                const res = await api.put(`/api/tasks/${editTask}`, {
                     title: form.title,
                     description: form.description,
                     priority: form.priority,
@@ -100,7 +101,7 @@ const Tasks = () => {
 
             }
             else {
-                const res = await axios.post(" http://localhost:8000/api/tasks", formData, {
+                const res = await api.post(" /api/tasks", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: `Bearer ${token}`
@@ -135,7 +136,7 @@ const Tasks = () => {
 
     const fetchTask = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/tasks", {
+            const res = await api.get("/api/tasks", {
                 headers: { Authorization: `Bearer ${token}` }
             })
             console.log(res)
@@ -174,7 +175,7 @@ const Tasks = () => {
     const handleDelete = async (id) => {
         let confirm = window.confirm(" Are you sure you want to delete task")
         if (confirm) {
-            const res = await axios.delete(`http://localhost:8000/api/tasks/${id}`, {
+            const res = await api.delete(`/api/tasks/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
 
@@ -186,7 +187,7 @@ const Tasks = () => {
     const handleStatus = async (id, newStatus) => {
         try {
             console.log(id)
-            await axios.patch(`http://localhost:8000/api/tasks/${id}/status`,
+            await api.patch(`/api/tasks/${id}/status`,
                 { status: newStatus },
                 {
                     headers: {
