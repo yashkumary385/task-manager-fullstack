@@ -262,14 +262,7 @@ const Tasks = () => {
                                    ))
 }
                                 </select>
-                                <input
-                                    type="text"
-                                    placeholder='Enter Whom You want to assign the task'
-                                    className="w-full px-4 py-2 border border-green-500 rounded-md shadow-sm text-gray-700"
-                                    value={form.assigned_to}
-                                    name="assigned_to"
-                                    onChange={handleChange}
-                                />
+                           
 
                                 <input
                                     type="file"
