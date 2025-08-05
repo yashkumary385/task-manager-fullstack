@@ -10,7 +10,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "../api.js"
 const Dashboard = () => {
-  const { user, logout , token } = useAuth();
+  const { user, logout , token ,setUser } = useAuth();
   const [editUser, setEditUser] = useState(null)
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({
@@ -99,7 +99,9 @@ const Dashboard = () => {
       } )
       console.log(res)
       toast.success(" edit successfull ")
+      setUser(res.data.user)
       setShowModal(false);
+
       } catch (error) {
         console.log(error)
         
