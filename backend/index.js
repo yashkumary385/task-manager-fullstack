@@ -23,9 +23,10 @@ app.get('/api/test', (req, res) => {
 
 // Middleware
 app.use(cors({
-    origin: "http://localhost:5173", // your frontend's port
+  origin: "https://mytaskapp2025.vercel.app", // or "*" temporarily
   credentials: true
 }));
+
 app.use(express.json());
 app.use( "/uploads" , express.static("uploads"))
 
