@@ -6,10 +6,11 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Modal from 'react-bootstrap/Modal';
 import Header from '../components/Header';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
 const Tasks = () => {
     const { user, token } = useAuth();
+    const navigate = useNavigate();
     const [editTask, setEditTask] = useState(null)
     const [showModal, setShowModal] = useState(false);
     const [tasks, setTasks] = useState([])
@@ -119,6 +120,7 @@ const Tasks = () => {
             });
             setEditTask(null)
             fetchTask()
+            toast.success("task created succesfully")
 
 
             // console.log(res);
@@ -290,6 +292,9 @@ const Tasks = () => {
                                 </Card.Text>
                                 <Card.Text className="text-sm text-muted">
                                     Status: <strong>{task.status}</strong>
+                                </Card.Text>
+                                <Card.Text className="text-sm text-muted">
+                                    Status: <strong>{task?.created_by}</strong>
                                 </Card.Text>
                                 {task.attachments && task.attachments.length > 0 && (
   <div className="mt-2">
