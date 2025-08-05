@@ -29,7 +29,7 @@ const Tasks = () => {
         const getNonAdmin = async()=>{
         try {
             
-            const res = await api.get("http://localhost:8000/getAll",{
+            const res = await api.get("/getAll",{
                 headers: {
                         Authorization: `Bearer ${token}`
                     }
