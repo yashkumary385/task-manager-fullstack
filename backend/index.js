@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8000;
-const MONGO_URI = process.env.MONGO_DB_URI;
+const MONGO_URI = process.env.MONGO_URI;
 //test Route
 app.get('/api/test', (req, res) => {
   res.json({ message: "✅ Backend is working!" });
