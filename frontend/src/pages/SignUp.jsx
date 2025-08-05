@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
 import api from "../api.js"
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 const SignUp = () => {
     const navigate = useNavigate()
     const [form, setForm] = useState({
