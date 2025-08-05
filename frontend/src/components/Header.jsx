@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
-  const { logout } = useAuth();
+  const { logout  , user} = useAuth();
 
   const handleLogout = () => {
     const confirm = window.confirm("Are you sure You want to logout ?")
@@ -21,14 +21,24 @@ const Header = () => {
     <Navbar className="bg-body-tertiary mb-2 relative">
       <Container fluid>
         <Navbar.Brand className="font-serif px-10">Task Manager</Navbar.Brand>
+       {   user ? ( <>
 
-
-        <Nav className="ms-auto align-items-center flex gap-3">
+          <Nav className="ms-auto align-items-center flex gap-3">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/dashboard">Dashboard</Nav.Link>
           <Nav.Link href="/tasks">Tasks</Nav.Link>
           <button onClick={handleLogout}>Logout</button>
         </Nav>
+      </> ) :
+      ( <>
+      <Nav className="ms-auto align-items-center flex gap-3">
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="/register">Register</Nav.Link>
+          <Nav.Link href="/login">Login</Nav.Link>
+        </Nav>
+        </>
+      )
+}
 
       </Container>
     </Navbar>

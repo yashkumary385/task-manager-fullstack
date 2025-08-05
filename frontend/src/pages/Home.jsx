@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Header from '../components/Header';
 
 const Home = () => {
   return (
+    <>
+    <Header/>
         <div
             className="flex justify-center items-center min-h-screen px-4"
             style={{ backgroundColor: "#4CAF50" }}
@@ -23,7 +26,7 @@ const Home = () => {
                     
             </div>
         </div>
-
+</>
     )
     
 
