@@ -8,6 +8,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGO_URI;
+
+// Middleware
+app.use(cors({
+  origin: "https://mytaskapp2025.vercel.app", // or "*" temporarily
+  credentials: true
+}));
 //test Route
 app.get('/api/test', (req, res) => {
   res.json({ message: "✅ Backend is working!" });
@@ -21,11 +27,7 @@ app.get('/api/test', (req, res) => {
 
 
 
-// Middleware
-app.use(cors({
-  origin: "https://mytaskapp2025.vercel.app", // or "*" temporarily
-  credentials: true
-}));
+
 
 app.use(express.json());
 app.use( "/uploads" , express.static("uploads"))
