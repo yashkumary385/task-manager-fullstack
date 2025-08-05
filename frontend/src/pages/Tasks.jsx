@@ -101,7 +101,7 @@ const Tasks = () => {
 
             }
             else {
-                const res = await api.post(" /api/tasks", formData, {
+                const res = await api.post("/api/tasks", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: `Bearer ${token}`
