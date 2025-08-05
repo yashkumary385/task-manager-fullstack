@@ -100,3 +100,27 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ message:"Failed to delete user."});
   }
 };
+
+
+export const getNonAdminUsers = async (req, res) => {
+    const query = { role: { $ne: "admin" } }; // exclude admins
+    
+
+    let sortBy = { createdAt: -1 };
+    if (req.query.sort === "old") {
+        sortBy = { createdAt: 1 };
+    }
+
+    try {
+        const users = await User.find(query)
+            .sort(sortBy)
+            .select("-password");
+
+        return res.status(200).json({
+            message: "Here are all users except admins",
+            users,
+        });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+};

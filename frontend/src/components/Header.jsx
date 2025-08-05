@@ -25,7 +25,7 @@ const Header = () => {
 
         <Nav className="ms-auto align-items-center flex gap-3">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/dashboard">dashboard</Nav.Link>
+          <Nav.Link href="/dashboard">Dashboard</Nav.Link>
           <Nav.Link href="/tasks">Tasks</Nav.Link>
           <button onClick={handleLogout}>Logout</button>
         </Nav>

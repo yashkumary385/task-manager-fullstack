@@ -13,16 +13,19 @@ app.get('/api/test', (req, res) => {
   res.json({ message: "✅ Backend is working!" });
 });
 // dummy test route
-app.post("/api/auth/register", (req, res) => {
-  res.status(201).json({ token: "mock-token" });
-});
+// app.post("/api/auth/register", (req, res) => {
+//   res.status(201).json({ token: "mock-token" });
+// });
 
 
 
 
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173", // your frontend's port
+  credentials: true
+}));
 app.use(express.json());
 app.use( "/uploads" , express.static("uploads"))
 
@@ -48,7 +51,7 @@ if (process.env.NODE_ENV !== "test") {
   mongoose
     .connect(MONGO_URI)
     .then(() => {
-      console.log("✅ Connected to MongoDB");
+      console.log(" Connected to MongoDB");
       app.listen(PORT, "0.0.0.0", () => {
         console.log(` Server running at http://127.0.0.1:${PORT}`);
       });

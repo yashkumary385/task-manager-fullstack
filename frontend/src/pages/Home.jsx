@@ -16,7 +16,7 @@ const Home = () => {
             <Link to="/login">
             <Button variant="success" className="w-100">Login</Button>
           </Link>
-          <Link to="/register">
+          <Link to="/signup">
             <Button variant="outline-success" className="w-100">Register</Button>
           </Link>
 

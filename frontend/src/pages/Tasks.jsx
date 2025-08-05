@@ -22,6 +22,26 @@ const Tasks = () => {
         created_by: user?._id,
         attachments: []
     })
+    const[users , setUsers] = useState([])
+
+    useEffect(()=>{
+        const getNonAdmin = async()=>{
+        try {
+            
+            const res = await axios("http://localhost:8000/getAll",{
+                headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+            })
+            setUsers(res.data.users)
+            console.log(res.data.users)
+            // console.log(res);
+        } catch (error) {
+            console.log(error)
+        }
+        }
+        getNonAdmin()
+    },[])
 
     const handleChange = (e) => {
         if (e.target.name === "attachments") {
@@ -74,6 +94,7 @@ const Tasks = () => {
 
                 toast.success("Task updated successfully!");
                 setShowModal(false);
+                fetchTask()
 
 
 
@@ -230,8 +251,19 @@ const Tasks = () => {
                                     name="dueDate"
                                     onChange={handleChange}
                                 />
+                                  <select
+                                    name="assigned_to"
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border border-green-500 rounded-md shadow-sm bg-white text-gray-700"
+                                >
+                                   { users.map((user)=>(
+                                    <option key={user._id} value={user._id}>{user.fullName}</option>
+                                   ))
+}
+                                </select>
                                 <input
                                     type="text"
+                                    placeholder='Enter Whom You want to assign the task'
                                     className="w-full px-4 py-2 border border-green-500 rounded-md shadow-sm text-gray-700"
                                     value={form.assigned_to}
                                     name="assigned_to"
@@ -265,6 +297,25 @@ const Tasks = () => {
                                 <Card.Text className="text-sm text-muted">
                                     Status: <strong>{task.status}</strong>
                                 </Card.Text>
+                                {task.attachments && task.attachments.length > 0 && (
+  <div className="mt-2">
+    <p className="text-sm text-muted font-semibold">Attachments:</p>
+    <ul className="list-disc pl-4">
+      {task.attachments.map((file, index) => (
+        <li key={index}>
+          <a
+            href={`http://localhost:8000/${file}`}
+            download
+            className="text-blue-600 underline"
+          >
+            {file}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
 
                                 {user?.role === "admin" ? (
                                     <>
