@@ -33,7 +33,6 @@ export const createTask =async (req,res)=>{
 
 
 export const getAllUserTasks = async(req,res)=>{ // first we grab the user id and then 
-
     try{
     const userId = req.user._id;
     const query= {}
