@@ -33,7 +33,7 @@ const Header = () => {
       ( <>
       <Nav className="ms-auto align-items-center flex gap-3">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/register">Register</Nav.Link>
+          <Nav.Link href="/signup">Register</Nav.Link>
           <Nav.Link href="/login">Login</Nav.Link>
         </Nav>
         </>

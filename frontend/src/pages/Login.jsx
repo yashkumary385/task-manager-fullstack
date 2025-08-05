@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import Button from 'react-bootstrap/Button';
 import { Lock, Mail } from "lucide-react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Login = () => {
@@ -92,6 +92,17 @@ const Login = () => {
                         Login
                     </Button>
                 </form>
+                <div>
+                    <p>If you havent Signed Up....</p>
+                <Link to="/signup">
+                <Button type="submit" variant="outline-success" className="w-100">
+                        Signup
+                    </Button>
+                    </Link>
+                    </div>
+
+
+
             </div>
         </div>
 

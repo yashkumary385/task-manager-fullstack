@@ -160,7 +160,14 @@ const SignUp = () => {
                     </Button>
 
                 </form >
-
+  <div>
+                    <p>If you are already Signed Up....</p>
+                <Link to="/login">
+                <Button type="submit" variant="outline-success" className="w-100">
+                        Login
+                    </Button>
+                    </Link>
+                    </div>
 
 
 
