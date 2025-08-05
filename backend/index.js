@@ -32,7 +32,7 @@ app.use( "/uploads" , express.static("uploads"))
 
 // AUTH ROUTES
 import authRoutes from "./routes/auth.routes.js"
-app.use('/api/auth',authRoutes)
+app.use('/auth',authRoutes)
 
 // PROTECTED ROUTES
 import protectedRoutes from "./routes/protected.route.js"
