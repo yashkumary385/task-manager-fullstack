@@ -1,10 +1,10 @@
-# 🧠 Task Manager – Fullstack App (Dockerized)
+#  Task Manager – Fullstack App (Dockerized)
 
 This is a fullstack task management application built with the MERN stack and containerized using Docker. It allows users to manage tasks through a RESTful API and a responsive frontend UI.
 
 ---
 
-## 🔧 Tech Stack
+##  Tech Stack
 
 - **Frontend**: React (Vite)
 - **Backend**: Node.js, Express
@@ -14,7 +14,7 @@ This is a fullstack task management application built with the MERN stack and co
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
  task-manager-fullstack/
 ├── backend/                  # Node.js + Express backend
