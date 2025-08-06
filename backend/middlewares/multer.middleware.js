@@ -1,5 +1,4 @@
 import multer from "multer";
-import express from "express"
 import path, { extname } from "path"
 // import fs from "fs"
 const storage = multer.diskStorage({

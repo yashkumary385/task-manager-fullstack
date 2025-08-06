@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 dotenv.config();
 
@@ -13,65 +13,47 @@ const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
 app.use(cors({
-  origin: "https://mytaskapp2025.vercel.app", 
-  credentials: true
+  origin: "https://mytaskapp2025.vercel.app",
+  credentials: true,
 }));
-app.options("*", cors()); 
-
-//test Route
-app.get('/api/test', (req, res) => {
-  res.json({ message: "Backend is working!" });
-});
-// dummy test route
-// app.post("/api/auth/register", (req, res) => {
-//   res.status(201).json({ token: "mock-token" });
-// });
-
-
-
-
-
-const uploadDir = path.join(process.cwd(), 'uploads');
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-  console.log("✅ Created 'uploads/' directory at runtime.");
-}
-
-
-
-
 app.use(express.json());
-app.use( "/uploads" , express.static("uploads"))
 
-// AUTH ROUTES
-import authRoutes from "./routes/auth.routes.js"
-app.use('/api/auth',authRoutes)
+// Health check
+app.get("/api/test", (req, res) => {
+  res.json({ message: "✅ Backend is working!" });
+});
 
-// PROTECTED ROUTES
-import protectedRoutes from "./routes/protected.route.js"
-app.use("/api/protected", protectedRoutes)
-
-// Users Routes
-import userRoutes from "./routes/user.routes.js"
-app.use("/api/users", userRoutes)
-
-// TASK ROUTES
+// Route Imports
+import authRoutes from "./routes/auth.routes.js";
+import protectedRoutes from "./routes/protected.route.js";
+import userRoutes from "./routes/user.routes.js";
 import taskRoutes from "./routes/task.routes.js";
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/protected", protectedRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/tasks", taskRoutes);
 
+// Uploads directory setup
+const uploadDir = path.resolve("uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+  console.log("✅ 'uploads/' folder created");
+}
+app.use("/uploads", express.static(uploadDir));
 
-
+// Connect to DB and start server
 if (process.env.NODE_ENV !== "test") {
   mongoose
     .connect(MONGO_URI)
     .then(() => {
-      console.log(" Connected to MongoDB");
+      console.log("✅ MongoDB connected");
       app.listen(PORT, "0.0.0.0", () => {
-        console.log(` Server running at http://127.0.0.1:${PORT}`);
+        console.log(`🚀 Server running on port ${PORT}`);
       });
     })
     .catch((err) => {
-      console.error(" MongoDB connection error:", err);
+      console.error("❌ MongoDB connection error:", err.message);
     });
 }

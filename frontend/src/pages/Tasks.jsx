@@ -24,40 +24,40 @@ const Tasks = () => {
         created_by: user?._id,
         attachments: []
     })
-    const[users , setUsers] = useState([])
+    const [users, setUsers] = useState([])
 
-    useEffect(()=>{
-        const getNonAdmin = async()=>{
-        try {
-            
-            const res = await api.get("/getAll",{
-                headers: {
+    useEffect(() => {
+        const getNonAdmin = async () => {
+            try {
+
+                const res = await api.get("/getAll", {
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
-            })
-            setUsers(res.data.users)
-            console.log(res.data.users)
-            // console.log(res);
-        } catch (error) {
-            console.log(error)
-        }
+                })
+                setUsers(res.data.users)
+                console.log(res.data.users)
+                // console.log(res);
+            } catch (error) {
+                console.log(error)
+            }
         }
         getNonAdmin()
-    },[])
+    }, [])
 
-const handleChange = (e) => {
-    if (e.target.name === "attachments") {
-        setForm((prev) => ({
-            ...prev,
-            attachments: e.target.files // FileList
-        }));
-    } else {
-        setForm((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }));
-    }
-};
+    const handleChange = (e) => {
+        if (e.target.name === "attachments") {
+            setForm((prev) => ({
+                ...prev,
+                attachments: e.target.files // FileList
+            }));
+        } else {
+            setForm((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value
+            }));
+        }
+    };
 
 
 
@@ -253,17 +253,17 @@ const handleChange = (e) => {
                                     name="dueDate"
                                     onChange={handleChange}
                                 />
-                                  <select
+                                <select
                                     name="assigned_to"
                                     onChange={handleChange}
                                     className="w-full px-4 py-2 border border-green-500 rounded-md shadow-sm bg-white text-gray-700"
                                 >
-                                   { users.map((user)=>(
-                                    <option key={user._id} value={user._id}>{user.fullName}</option>
-                                   ))
-}
+                                    {users.map((user) => (
+                                        <option key={user._id} value={user._id}>{user.fullName}</option>
+                                    ))
+                                    }
                                 </select>
-                           
+
 
                                 <input
                                     type="file"
@@ -281,10 +281,10 @@ const handleChange = (e) => {
                 }
                 <div className='w-1/2'>
                     <h1 className='text-3xl font-bold mb-6 text-white'>Your Tasks</h1>
-                    {tasks.map((task) => 
+                    {tasks.map((task) =>
                     (
                         <Card key={task._id} className="mb-4 shadow-md">
-                            
+
                             <Card.Header className="font-semibold capitalize"> Priority : {task?.priority} priority</Card.Header>
                             <Card.Body>
                                 <Card.Title className="text-xl font-bold"> Title : {task?.title}</Card.Title>
@@ -294,22 +294,24 @@ const handleChange = (e) => {
                                 <Card.Text className="text-sm text-muted">
                                     Status: <strong>{task?.status}</strong>
                                 </Card.Text>
-                                
-                                {task.attachments && task.attachments.length > 0 && (
-  <div className="mt-2">
-    <p className="text-sm text-muted font-semibold">Attachments:</p>
-    <ul className="list-disc pl-4">
-      {task.attachments.map((file, index) => (
-        <li key={index}>
-       <a href={`https://task-manager-backend-zz8q.onrender.com/${file}`} download>
-  {file}
-</a>
 
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+                             <div className="mt-2">
+  <p className="text-sm text-muted font-semibold">Attachments:</p>
+  <ul className="list-disc pl-4">
+    {task.attachments.map((file, index) => (
+      <li key={index}>
+        <a
+          href={`https://task-manager-backend-zz8q.onrender.com/api/tasks/download/${file}`}
+          download
+          className="text-blue-600 hover:underline"
+        >
+          {file}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
 
                                 {user?.role === "admin" ? (
