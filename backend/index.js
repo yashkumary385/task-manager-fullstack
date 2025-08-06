@@ -32,7 +32,7 @@ import taskRoutes from "./routes/task.routes.js";
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
-app.use("/api/users", userRoutes);
+app.use("/", userRoutes);
 app.use("/api/tasks", taskRoutes);
 
 // Uploads directory setup

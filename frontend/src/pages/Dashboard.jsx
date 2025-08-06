@@ -47,7 +47,7 @@ const Dashboard = () => {
       try {
         let confirm = window.confirm("Are you sure you want to delete profile you wont be able to recover it ? ")
         if(confirm){
-           const res = await api.delete(`/api/users/users/${user._id}`,
+           const res = await api.delete(`/users/${user._id}`,
             {
               headers : {Authorization : `Bearer ${token}`}
             }
@@ -88,7 +88,7 @@ const Dashboard = () => {
     const handleSubmit = async(e)=>{
       e.preventDefault();
       try {
-        const res = await api.put(`/api/users/users/${editUser}`,{
+        const res = await api.put(`/users/${editUser}`,{
           fullName: form.fullName,
                 email: form.email,
                 userName:form.userName,
