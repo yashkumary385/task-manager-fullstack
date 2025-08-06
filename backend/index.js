@@ -16,6 +16,8 @@ app.use(cors({
   origin: "https://mytaskapp2025.vercel.app", // or "*" temporarily
   credentials: true
 }));
+app.options("*", cors()); // 👈 Handle preflight
+
 //test Route
 app.get('/api/test', (req, res) => {
   res.json({ message: "✅ Backend is working!" });
