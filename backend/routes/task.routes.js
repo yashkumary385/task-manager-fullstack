@@ -11,7 +11,7 @@ router.get("/",verifyToken,getAllUserTasks)
 router.get("/:id", verifyToken,getOneTask)
 router.put("/:id",verifyToken,updateTask)
 router.delete("/:id",verifyToken,deleteTask)
-router.get("/download/:filename",verifyToken,deleteTask)
+router.get("/download/:filename",verifyToken,fileDownload)
 router.patch("/:id/status", verifyToken, updateStatus);
 
 export default router
