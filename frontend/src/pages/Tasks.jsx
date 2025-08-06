@@ -284,17 +284,17 @@ const Tasks = () => {
                     <h1 className='text-3xl font-bold mb-6 text-white'>Your Tasks</h1>
                     {tasks.map((task) => (
                         <Card key={task._id} className="mb-4 shadow-md">
-                            <Card.Header className="font-semibold capitalize"> Priority : {task.priority} priority</Card.Header>
+                            <Card.Header className="font-semibold capitalize"> Priority : {task?.priority} priority</Card.Header>
                             <Card.Body>
-                                <Card.Title className="text-xl font-bold"> Title : {task.title}</Card.Title>
+                                <Card.Title className="text-xl font-bold"> Title : {task?.title}</Card.Title>
                                 <Card.Text className="text-gray-700">
-                                    Description:  {task.description}
+                                    Description:  {task?.description}
                                 </Card.Text>
                                 <Card.Text className="text-sm text-muted">
-                                    Status: <strong>{task.status}</strong>
+                                    Status: <strong>{task?.status}</strong>
                                 </Card.Text>
                                 <Card.Text className="text-sm text-muted">
-                                    Status: <strong>{task?.created_by}</strong>
+                                    Created By: <strong>{task?.created_by}</strong>
                                 </Card.Text>
                                 {task.attachments && task.attachments.length > 0 && (
   <div className="mt-2">
