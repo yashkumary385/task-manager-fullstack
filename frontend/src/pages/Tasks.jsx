@@ -45,22 +45,20 @@ const Tasks = () => {
         getNonAdmin()
     },[])
 
-    const handleChange = (e) => {
-        if (e.target.name === "attachments") {
-            setForm((prev) => (
-                {
-                    ...prev, attachments: e.target.files
-                }
-            ))
-        }
-        setForm((prev) => (
-            {
-                ...prev,
-                [e.target.name]: e.target.value
-            }
-        ))
-
+const handleChange = (e) => {
+    if (e.target.name === "attachments") {
+        setForm((prev) => ({
+            ...prev,
+            attachments: e.target.files // FileList
+        }));
+    } else {
+        setForm((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
     }
+};
+
 
 
     const handleSubmit = async (e) => {
