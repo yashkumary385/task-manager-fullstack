@@ -18,7 +18,13 @@ const MONGO_URI = process.env.MONGO_URI;
 const allowedOrigins = ["https://mytaskapp2025.vercel.app"];
 
 app.use(cors({
-  origin: "https://mytaskapp2025.vercel.app",
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed from this origin"));
+    }
+  },
   credentials: true,
 }));
 
