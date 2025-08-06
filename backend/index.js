@@ -11,14 +11,19 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGO_URI;
 
-// Middleware
-// import cors from "cors";
+// ✅ Allowed frontend domains
+const allowedOrigins = [
+  "https://mytaskapp2025.vercel.app",
+  "https://mytaskapp2025-git-master-yashkumary385-1183s-projects.vercel.app", // Vercel preview
+];
 
-// ✅ Place BEFORE any routes
-const allowedOrigins = ["https://mytaskapp2025.vercel.app"];
-
+// ✅ CORS setup - must be before any routes
 app.use(cors({
   origin: function (origin, callback) {
+    const allowedOrigins = [
+      "https://mytaskapp2025.vercel.app",
+      "https://mytaskapp2025-git-master-yashkumary385-1183s-projects.vercel.app"
+    ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -26,11 +31,16 @@ app.use(cors({
     }
   },
   credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 
-app.use(express.json());
+// ✅ Respond to CORS preflight requests
+// app.options("*", cors());
 
+// Middleware
+app.use(express.json());
 
 // Health check
 app.get("/api/test", (req, res) => {
