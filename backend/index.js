@@ -50,18 +50,17 @@ app.use("/api/tasks", taskRoutes);
 const uploadDir = path.resolve("uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
-  console.log("✅ 'uploads/' folder created");
+  console.log(" 'uploads/' folder created");
 }
 app.use("/uploads", express.static(uploadDir));
 
-// ✅ Connect to DB and start server
 if (process.env.NODE_ENV !== "test") {
   mongoose
     .connect(MONGO_URI)
     .then(() => {
       console.log(" MongoDB connected");
       app.listen(PORT, "0.0.0.0", () => {
-        console.log(`🚀 Server running on port ${PORT}`);
+        console.log(` Server running on port ${PORT}`);
       });
     })
     .catch((err) => {
