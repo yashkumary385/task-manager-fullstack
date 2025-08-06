@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
+import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
 
@@ -25,6 +27,14 @@ app.get('/api/test', (req, res) => {
 
 
 
+
+
+const uploadDir = path.join(process.cwd(), 'uploads');
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+  console.log("✅ Created 'uploads/' directory at runtime.");
+}
 
 
 
