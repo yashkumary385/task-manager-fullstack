@@ -148,22 +148,23 @@ res.status(200).json({message:"deleted successfully"})
 
 }
 
- export const fileDownload =async(req,res)=>{
-    try {
-            // const filename = req.params.filename;
-            const filename = req.params[0];
-    const filePath = path.join("uploads/" , filename)
-     if(fs.existsSync(filePath)){
-        res.dowload(filePath)
-     }else{
-         res.status(404).json({ message: "File not found" });
-     }
-    } catch (error) {
-        return res.status(404).json({error:error})
+ import fs from "fs";
+import path from "path";
+
+export const fileDownload = async (req, res) => {
+  try {
+    const filename = req.params[0]; 
+    const filePath = path.join("uploads", filename);
+
+    if (fs.existsSync(filePath)) {
+      return res.download(filePath); // 
+    } else {
+      return res.status(404).json({ message: "File not found" });
     }
-
- }
-
+  } catch (error) {
+    return res.status(500).json({ error: error.message || "Download error" });
+  }
+};
 
  // Change the status of a given task (admin-only)
 export const updateStatus = async (req, res) => {
