@@ -280,8 +280,10 @@ const handleChange = (e) => {
                 }
                 <div className='w-1/2'>
                     <h1 className='text-3xl font-bold mb-6 text-white'>Your Tasks</h1>
-                    {tasks.map((task) => (
+                    {tasks.map((task) => 
+                    (
                         <Card key={task._id} className="mb-4 shadow-md">
+                            
                             <Card.Header className="font-semibold capitalize"> Priority : {task?.priority} priority</Card.Header>
                             <Card.Body>
                                 <Card.Title className="text-xl font-bold"> Title : {task?.title}</Card.Title>
@@ -291,22 +293,17 @@ const handleChange = (e) => {
                                 <Card.Text className="text-sm text-muted">
                                     Status: <strong>{task?.status}</strong>
                                 </Card.Text>
-                                <Card.Text className="text-sm text-muted">
-                                    Created By: <strong>{task?.created_by}</strong>
-                                </Card.Text>
+                                
                                 {task.attachments && task.attachments.length > 0 && (
   <div className="mt-2">
     <p className="text-sm text-muted font-semibold">Attachments:</p>
     <ul className="list-disc pl-4">
       {task.attachments.map((file, index) => (
         <li key={index}>
-          <a
-            href={`http://localhost:8000/${file}`}
-            download
-            className="text-blue-600 underline"
-          >
-            {file}
-          </a>
+       <a href={`https://task-manager-backend-zz8q.onrender.com/${file}`} download>
+  {file}
+</a>
+
         </li>
       ))}
     </ul>
