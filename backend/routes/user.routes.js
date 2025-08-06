@@ -15,7 +15,7 @@ router.get("/allUsers", verifyToken, getUsers);
 router.get("/profile", verifyToken, getOneUser); // 
 router.put("/users/:id", verifyToken, updateUser);
 router.delete("/users/:id", verifyToken, deleteUser);
-router.get("/current-user", verifyToken, getCurrentUser);
+router.get("/currentUser", verifyToken, getCurrentUser);
 router.get("/getAll", verifyToken, getNonAdminUsers);
 
 export default router;

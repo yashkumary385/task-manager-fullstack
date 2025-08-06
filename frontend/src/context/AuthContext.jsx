@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         // console.log("no token")
         return
     }
-                const res = await api.get("/current-user", {
+                const res = await api.get("/currentUser", {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 setUser(res.data.user)

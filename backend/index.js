@@ -12,11 +12,19 @@ const PORT = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
+// import cors from "cors";
+
+// ✅ Place BEFORE any routes
+const allowedOrigins = ["https://mytaskapp2025.vercel.app"];
+
 app.use(cors({
   origin: "https://mytaskapp2025.vercel.app",
   credentials: true,
 }));
+
+
 app.use(express.json());
+
 
 // Health check
 app.get("/api/test", (req, res) => {
