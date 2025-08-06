@@ -13,14 +13,14 @@ const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
 app.use(cors({
-  origin: "https://mytaskapp2025.vercel.app", // or "*" temporarily
+  origin: "https://mytaskapp2025.vercel.app", 
   credentials: true
 }));
-app.options("*", cors()); // 👈 Handle preflight
+app.options("*", cors()); 
 
 //test Route
 app.get('/api/test', (req, res) => {
-  res.json({ message: "✅ Backend is working!" });
+  res.json({ message: "Backend is working!" });
 });
 // dummy test route
 // app.post("/api/auth/register", (req, res) => {
@@ -54,7 +54,7 @@ app.use("/", protectedRoutes)
 
 // Users Routes
 import userRoutes from "./routes/user.routes.js"
-app.use("/", userRoutes)
+app.use("/api/users", userRoutes)
 
 // TASK ROUTES
 import taskRoutes from "./routes/task.routes.js";
