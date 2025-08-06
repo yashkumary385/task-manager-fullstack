@@ -151,7 +151,9 @@ res.status(200).json({message:"deleted successfully"})
 
 export const fileDownload = async (req, res) => {
   try {
-    const filename = req.params[0]; 
+    // const filename = req.params[0]; 
+    const filename = req.params.filename;
+
     const filePath = path.join("uploads", filename);
 
     if (fs.existsSync(filePath)) {
