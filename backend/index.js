@@ -50,7 +50,7 @@ app.use('/api/auth',authRoutes)
 
 // PROTECTED ROUTES
 import protectedRoutes from "./routes/protected.route.js"
-app.use("/", protectedRoutes)
+app.use("/api/protected", protectedRoutes)
 
 // Users Routes
 import userRoutes from "./routes/user.routes.js"
