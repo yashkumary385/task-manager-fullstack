@@ -6,7 +6,7 @@ import { updateStatus } from "../controllers/task.controller.js";
 const router = Router();
 
 
-router.get("/download/:filename", verifyToken, fileDownload);
+router.get("/download/:filename(*)", verifyToken, fileDownload);
 router.patch("/:id/status", verifyToken, updateStatus);
 
 
