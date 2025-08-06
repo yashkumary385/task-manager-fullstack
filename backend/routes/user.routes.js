@@ -12,7 +12,7 @@ import { verifyToken } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 router.get("/allUsers", verifyToken, getUsers);
-router.get("/profile", verifyToken, getOneUser); // ✅ renamed from "/"
+router.get("/profile", verifyToken, getOneUser); // 
 router.put("/users/:id", verifyToken, updateUser);
 router.delete("/users/:id", verifyToken, deleteUser);
 router.get("/current-user", verifyToken, getCurrentUser);

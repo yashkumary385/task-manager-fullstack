@@ -69,7 +69,7 @@ const handleChange = (e) => {
         formData.append("description", form.description);
         formData.append("priority", form.priority);
         formData.append("dueDate", form.dueDate);
-formData.append("assigned_to", form.assigned_to);
+        formData.append("assigned_to", form.assigned_to);
 
         for (let i = 0; i < form.attachments.length; i++) {
             formData.append("attachments", form.attachments[i]);
