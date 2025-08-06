@@ -41,7 +41,7 @@ export const getOneUser = async (req, res) => {
 
 export const getCurrentUser = async(req,res)=>{
     try {
-        const userId = req.user._id;
+        const userId = req.user.id;
         const user = await User.findById(userId).select("-password")
         if(!user){
             return res.status(404).json({message:"Invalid User"})
