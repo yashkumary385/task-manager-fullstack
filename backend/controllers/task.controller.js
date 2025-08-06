@@ -148,8 +148,6 @@ res.status(200).json({message:"deleted successfully"})
 
 }
 
- import fs from "fs";
-import path from "path";
 
 export const fileDownload = async (req, res) => {
   try {
