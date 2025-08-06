@@ -1,4 +1,4 @@
-# ✅ Task Manager App (MERN Stack)
+# Task Manager App (MERN Stack)
 
 This is a fullstack task management application built with the **MERN stack**. It allows users to manage tasks through a RESTful API and a responsive frontend UI.
 
